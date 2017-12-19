@@ -18,6 +18,12 @@ class Player {
 
     let recordings = Variable<[String]>([])
     let recording = Variable<Bool>(false)
+    var activeNotes = Set<MIDINoteNumber>()
+    var sustain = false {
+        didSet {
+            sustainReleased()
+        }
+    }
 
     init() {
         AKAudioFile.cleanTempDirectory()
@@ -50,15 +56,24 @@ class Player {
         refreshRecordings()
     }
 
-    func play(note: Note) {
+    func play(note: MIDINoteNumber) {
         AudioKit.output = mixer
-        let midiNumber = note.midiNumber(inOctave: 4)
-        bank.play(noteNumber: midiNumber, velocity: 80)
+        bank.play(noteNumber: note, velocity: 80)
+        activeNotes.insert(note)
     }
 
-    func stop(note: Note) {
-        let midiNumber = note.midiNumber(inOctave: 4)
-        bank.stop(noteNumber: midiNumber)
+    func stop(note: MIDINoteNumber) {
+        if !sustain {
+            activeNotes.remove(note)
+            bank.stop(noteNumber: note)
+        }
+    }
+
+    func sustainReleased() {
+        for note in activeNotes {
+            bank.stop(noteNumber: note)
+        }
+        activeNotes.removeAll()
     }
 
     func toggleRecord() {
@@ -82,7 +97,7 @@ class Player {
 
     private func finishRecording() {
         nodeRecorder.stop()
-        let name = "recording_\(recordings.value.count)"
+        let name = "\(recordings.value.count)"
         nodeRecorder.audioFile?.exportAsynchronously(name: name, baseDir: .documents, exportFormat: .m4a)
         { [weak self] _, exportError in
             if let error = exportError {
@@ -100,13 +115,14 @@ class Player {
         do {
             let directoryContents = try FileManager.default.contentsOfDirectory(at: documentsUrl, includingPropertiesForKeys: nil, options: [])
             recordings.value = directoryContents.filter{ $0.pathExtension == "m4a" }
-                .map { $0.lastPathComponent }
+                .map { $0.lastPathComponent }.sorted { $0 > $1 }
         } catch {
             print(error.localizedDescription)
         }
     }
 
     func play(recordingNamed name: String) {
+        recordPlayer?.stop()
         guard let documentsUrl =  FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
             fatalError("error: can't fetch documents directory")
         }
@@ -114,6 +130,7 @@ class Player {
             let url = documentsUrl.appendingPathComponent(name)
             let file = try AKAudioFile(forReading: url)
             recordPlayer = try AKAudioPlayer(file: file)
+            recordPlayer?.volume = 2
             AudioKit.output = recordPlayer
             recordPlayer?.play()
         } catch {
