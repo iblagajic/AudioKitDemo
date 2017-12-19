@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" systemVersion="17A277" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -9,16 +13,243 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Mena_Test_Project" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g0R-cW-qfl">
+                                <rect key="frame" x="37" y="126" width="102" height="105"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.19102048869999999" green="1" blue="0.86248034240000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Record Audio">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="record:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FHm-ie-ctc"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gOa-dM-a8Y">
+                                <rect key="frame" x="0.0" y="333.5" width="375" height="333.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecordingCell" id="K0j-Zh-Nhb" customClass="RecordingCell">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="K0j-Zh-Nhb" id="eKN-3j-ogk">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="make sure this button changes to &quot;Done&quot; once user starts recording" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k3c-LY-Lgg">
+                                <rect key="frame" x="153" y="121" width="190" height="115"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WCB-5o-AMm">
+                                <rect key="frame" x="52" y="74" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.19102048869999999" green="1" blue="0.86248034240000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="C">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="keyReleased:" destination="BYZ-38-t0r" eventType="touchDragExit" id="81B-rE-Rpd"/>
+                                    <action selector="keyReleased:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aKH-26-y9d"/>
+                                    <action selector="keyTapped:" destination="BYZ-38-t0r" eventType="touchDown" id="TXX-7W-JLw"/>
+                                    <action selector="keyTapped:" destination="BYZ-38-t0r" eventType="touchDragEnter" id="bay-vm-ohu"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="em0-JB-Zsl">
+                                <rect key="frame" x="73" y="36" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.19102048869999999" green="1" blue="0.86248034240000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="C#">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="keyReleased:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FuB-fu-FPK"/>
+                                    <action selector="keyReleased:" destination="BYZ-38-t0r" eventType="touchDragExit" id="aAm-O8-gdx"/>
+                                    <action selector="keyTapped:" destination="BYZ-38-t0r" eventType="touchDragEnter" id="g9N-6I-mIy"/>
+                                    <action selector="keyTapped:" destination="BYZ-38-t0r" eventType="touchDown" id="yEV-fz-GMh"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="axj-41-W8s">
+                                <rect key="frame" x="101" y="74" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.19102048869999999" green="1" blue="0.86248034240000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="D">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="keyReleased:" destination="BYZ-38-t0r" eventType="touchDragExit" id="grP-kq-gkT"/>
+                                    <action selector="keyReleased:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pe5-YU-4ZR"/>
+                                    <action selector="keyTapped:" destination="BYZ-38-t0r" eventType="touchDown" id="MEB-2F-w4w"/>
+                                    <action selector="keyTapped:" destination="BYZ-38-t0r" eventType="touchDragEnter" id="iNm-Wr-DJh"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RCK-MO-suT">
+                                <rect key="frame" x="118" y="36" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.19102048869999999" green="1" blue="0.86248034240000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="D#">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="keyReleased:" destination="BYZ-38-t0r" eventType="touchUpInside" id="be6-J9-YOw"/>
+                                    <action selector="keyReleased:" destination="BYZ-38-t0r" eventType="touchDragExit" id="uLb-cQ-8Zv"/>
+                                    <action selector="keyTapped:" destination="BYZ-38-t0r" eventType="touchDragEnter" id="3jK-Ip-NlN"/>
+                                    <action selector="keyTapped:" destination="BYZ-38-t0r" eventType="touchDown" id="rIb-jb-M7H"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="4" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KMA-eU-4Zr">
+                                <rect key="frame" x="139" y="74" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.19102048869999999" green="1" blue="0.86248034240000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="E">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="keyReleased:" destination="BYZ-38-t0r" eventType="touchDragExit" id="2zE-qM-AVu"/>
+                                    <action selector="keyReleased:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nav-bq-fqp"/>
+                                    <action selector="keyTapped:" destination="BYZ-38-t0r" eventType="touchDown" id="FDO-II-g5C"/>
+                                    <action selector="keyTapped:" destination="BYZ-38-t0r" eventType="touchDragEnter" id="KBj-2J-B7X"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dUq-8F-2hU">
+                                <rect key="frame" x="172" y="74" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.19102048869999999" green="1" blue="0.86248034240000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="F">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="keyReleased:" destination="BYZ-38-t0r" eventType="touchDragExit" id="2EE-OO-jtj"/>
+                                    <action selector="keyReleased:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3tw-LN-8Op"/>
+                                    <action selector="keyTapped:" destination="BYZ-38-t0r" eventType="touchDragEnter" id="BRO-Or-uwD"/>
+                                    <action selector="keyTapped:" destination="BYZ-38-t0r" eventType="touchDown" id="dZ6-pi-Us1"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="6" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lVA-Rg-iPh">
+                                <rect key="frame" x="192" y="36" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.19102048869999999" green="1" blue="0.86248034240000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="F#">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="keyReleased:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VoC-et-yfm"/>
+                                    <action selector="keyReleased:" destination="BYZ-38-t0r" eventType="touchDragExit" id="een-DC-DM2"/>
+                                    <action selector="keyTapped:" destination="BYZ-38-t0r" eventType="touchDown" id="0tH-nT-5rw"/>
+                                    <action selector="keyTapped:" destination="BYZ-38-t0r" eventType="touchDragEnter" id="h0q-rO-HJc"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="7" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bi8-4q-syE">
+                                <rect key="frame" x="210" y="74" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.19102048869999999" green="1" blue="0.86248034240000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="G">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="keyReleased:" destination="BYZ-38-t0r" eventType="touchDragExit" id="NnK-TU-zvy"/>
+                                    <action selector="keyReleased:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uau-ME-fDu"/>
+                                    <action selector="keyTapped:" destination="BYZ-38-t0r" eventType="touchDragEnter" id="ItU-ul-Hui"/>
+                                    <action selector="keyTapped:" destination="BYZ-38-t0r" eventType="touchDown" id="oDV-Jf-PYr"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="8" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qvg-KS-EJ2">
+                                <rect key="frame" x="230" y="36" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.19102048869999999" green="1" blue="0.86248034240000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="G#">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="keyReleased:" destination="BYZ-38-t0r" eventType="touchUpInside" id="U8P-CI-qdm"/>
+                                    <action selector="keyReleased:" destination="BYZ-38-t0r" eventType="touchDragExit" id="fYJ-0M-drx"/>
+                                    <action selector="keyTapped:" destination="BYZ-38-t0r" eventType="touchDown" id="Pr4-I8-nzN"/>
+                                    <action selector="keyTapped:" destination="BYZ-38-t0r" eventType="touchDragEnter" id="WSa-Du-LZ5"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="9" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aMW-t6-v5G">
+                                <rect key="frame" x="248" y="74" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.19102048869999999" green="1" blue="0.86248034240000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="A">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="keyReleased:" destination="BYZ-38-t0r" eventType="touchUpInside" id="68G-XK-IhH"/>
+                                    <action selector="keyReleased:" destination="BYZ-38-t0r" eventType="touchDragExit" id="rNW-q9-vs5"/>
+                                    <action selector="keyTapped:" destination="BYZ-38-t0r" eventType="touchDown" id="EL2-8q-tNk"/>
+                                    <action selector="keyTapped:" destination="BYZ-38-t0r" eventType="touchDragEnter" id="l5x-TY-ADe"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="10" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LPo-QS-f2b">
+                                <rect key="frame" x="268" y="36" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.19102048869999999" green="1" blue="0.86248034240000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="A#">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="keyReleased:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UMv-Dl-6A0"/>
+                                    <action selector="keyReleased:" destination="BYZ-38-t0r" eventType="touchDragExit" id="dkf-7Y-lkY"/>
+                                    <action selector="keyTapped:" destination="BYZ-38-t0r" eventType="touchDown" id="2VD-Bd-Oym"/>
+                                    <action selector="keyTapped:" destination="BYZ-38-t0r" eventType="touchDragEnter" id="biU-dj-IfH"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="11" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dqb-xN-qLz">
+                                <rect key="frame" x="286" y="74" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.19102048869999999" green="1" blue="0.86248034240000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="B">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="keyReleased:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ISU-us-RZc"/>
+                                    <action selector="keyReleased:" destination="BYZ-38-t0r" eventType="touchDragExit" id="Uz6-tL-cc4"/>
+                                    <action selector="keyTapped:" destination="BYZ-38-t0r" eventType="touchDragEnter" id="dI4-h2-pXL"/>
+                                    <action selector="keyTapped:" destination="BYZ-38-t0r" eventType="touchDown" id="dka-H3-rO6"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="12" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pd8-os-sZq">
+                                <rect key="frame" x="324" y="74" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.19102048869999999" green="1" blue="0.86248034240000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="C">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="keyReleased:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8mk-1y-7qf"/>
+                                    <action selector="keyReleased:" destination="BYZ-38-t0r" eventType="touchDragExit" id="BL0-Iq-ekJ"/>
+                                    <action selector="keyTapped:" destination="BYZ-38-t0r" eventType="touchDown" id="Qie-b6-D5o"/>
+                                    <action selector="keyTapped:" destination="BYZ-38-t0r" eventType="touchDragEnter" id="xCb-6l-hDl"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="gOa-dM-a8Y" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="af5-Tu-wLB"/>
+                            <constraint firstItem="gOa-dM-a8Y" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.5" id="gtv-7y-q55"/>
+                            <constraint firstItem="gOa-dM-a8Y" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="nqe-3J-rft"/>
+                            <constraint firstItem="gOa-dM-a8Y" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="uyj-8S-x5K"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="recordButton" destination="g0R-cW-qfl" id="A6O-x4-Inx"/>
+                        <outlet property="tableView" destination="gOa-dM-a8Y" id="ZoP-h2-KNC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-79.200000000000003" y="133.5832083958021"/>
         </scene>
     </scenes>
 </document>
