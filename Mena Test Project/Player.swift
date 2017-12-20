@@ -22,7 +22,7 @@ class Player {
     var sustain = false {
         didSet {
             if !sustain {
-                sustainReleased()
+                stopAll()
             }
         }
     }
@@ -37,13 +37,15 @@ class Player {
         }
 
         AKSettings.defaultToSpeaker = true
-        
-        bank.attackDuration = 0.1
-        bank.decayDuration = 0.3
-        bank.sustainLevel = 0.1
-        bank.releaseDuration = 0.5
 
-        mixer = AKMixer(bank)
+        do {
+            recordPlayer = try AKAudioPlayer(file: AKAudioFile())
+            recordPlayer?.volume = 2
+        } catch {
+            print(error.localizedDescription)
+        }
+
+        mixer = AKMixer(bank, recordPlayer)
 
         let microphone = AKMicrophone()
         let microphoneMixer = AKMixer(microphone)
@@ -53,16 +55,22 @@ class Player {
             fatalError()
         }
 
+        setupOscillator()
+
         AudioKit.output = mixer
         AudioKit.start()
 
         refreshRecordings()
     }
 
+    private func setupOscillator() {
+        bank.attackDuration = 0.1
+        bank.decayDuration = 0.3
+        bank.sustainLevel = 0.1
+        bank.releaseDuration = 0.5
+    }
+
     func play(note: MIDINoteNumber) {
-        if (AudioKit.output != mixer) {
-            AudioKit.output = mixer
-        }
         bank.play(noteNumber: note, velocity: 80)
         activeNotes.insert(note)
     }
@@ -78,7 +86,7 @@ class Player {
         }
     }
 
-    func sustainReleased() {
+    func stopAll() {
         for note in activeNotes {
             bank.stop(noteNumber: note)
         }
@@ -89,7 +97,6 @@ class Player {
         if nodeRecorder.isRecording {
             finishRecording()
             recording.value = false
-            try? nodeRecorder.reset()
         } else {
             startRecording()
             recording.value = true
@@ -98,6 +105,7 @@ class Player {
 
     private func startRecording() {
         do {
+            try nodeRecorder.reset()
             try nodeRecorder.record()
         } catch {
             print(error.localizedDescription)
@@ -138,17 +146,11 @@ class Player {
         do {
             let url = documentsUrl.appendingPathComponent(name)
             let file = try AKAudioFile(forReading: url)
-            recordPlayer = try AKAudioPlayer(file: file)
-            recordPlayer?.volume = 2
-            AudioKit.output = recordPlayer
+            try recordPlayer?.replace(file: file)
             recordPlayer?.play()
         } catch {
             print(error.localizedDescription)
         }
-    }
-
-    func stopPlaying() {
-        recordPlayer?.stop()
     }
 
 }
