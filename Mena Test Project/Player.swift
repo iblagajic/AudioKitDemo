@@ -11,7 +11,7 @@ import RxSwift
 
 class Player {
 
-    let bank = AKOscillatorBank()
+    let bank = AKFMOscillatorBank()
     let mixer: AKMixer
     let nodeRecorder: AKNodeRecorder
     var recordPlayer: AKAudioPlayer?
@@ -29,7 +29,6 @@ class Player {
 
     init() {
         AKAudioFile.cleanTempDirectory()
-        AKSettings.bufferLength = .medium
 
         do {
             try AKSettings.setSession(category: .playAndRecord, with: .allowBluetoothA2DP)
@@ -39,8 +38,8 @@ class Player {
 
         AKSettings.defaultToSpeaker = true
         
-        bank.attackDuration = 0.01
-        bank.decayDuration = 0.1
+        bank.attackDuration = 0.1
+        bank.decayDuration = 0.3
         bank.sustainLevel = 0.1
         bank.releaseDuration = 0.5
 
@@ -61,7 +60,9 @@ class Player {
     }
 
     func play(note: MIDINoteNumber) {
-        AudioKit.output = mixer
+        if (AudioKit.output != mixer) {
+            AudioKit.output = mixer
+        }
         bank.play(noteNumber: note, velocity: 80)
         activeNotes.insert(note)
     }
