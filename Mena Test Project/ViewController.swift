@@ -40,6 +40,12 @@ class ViewController: UIViewController, AKKeyboardDelegate {
         addKeyboard()
         styleRecordButton()
         styleSustainButton()
+
+        AVAudioSession.sharedInstance().requestRecordPermission() { [weak self] granted in
+            DispatchQueue.main.async {
+                self?.updateRecordButton()
+            }
+        }
     }
 
     func noteOn(note: MIDINoteNumber) {
@@ -76,7 +82,6 @@ class ViewController: UIViewController, AKKeyboardDelegate {
 
     private func styleRecordButton() {
         recordButton.layer.cornerRadius = recordButton.frame.width/2
-        recordButton.backgroundColor = .red
         recordButton.setTitleColor(.white, for: .normal)
     }
 
@@ -85,6 +90,17 @@ class ViewController: UIViewController, AKKeyboardDelegate {
         sustainPedal.layer.cornerRadius = sustainPedal.frame.width/2
         sustainPedal.backgroundColor = .gray
         sustainPedal.setTitleColor(.white, for: .normal)
+    }
+
+    private func updateRecordButton() {
+        switch AVAudioSession.sharedInstance().recordPermission() {
+        case AVAudioSessionRecordPermission.granted:
+            recordButton.backgroundColor = .red
+            recordButton.isEnabled = true
+        default:
+            recordButton.backgroundColor = .lightGray
+            recordButton.isEnabled = false
+        }
     }
 }
 
