@@ -21,7 +21,9 @@ class Player {
     var activeNotes = Set<MIDINoteNumber>()
     var sustain = false {
         didSet {
-            sustainReleased()
+            if !sustain {
+                sustainReleased()
+            }
         }
     }
 
@@ -40,7 +42,7 @@ class Player {
         bank.attackDuration = 0.01
         bank.decayDuration = 0.1
         bank.sustainLevel = 0.1
-        bank.releaseDuration = 0.3
+        bank.releaseDuration = 0.5
 
         mixer = AKMixer(bank)
 
@@ -63,9 +65,13 @@ class Player {
     }
 
     func stop(note: MIDINoteNumber) {
-        if !sustain {
-            activeNotes.remove(note)
-            bank.stop(noteNumber: note)
+        let offset = DispatchTime.now() + .milliseconds(Int(bank.releaseDuration * 1000))
+        DispatchQueue.main.asyncAfter(deadline: offset) { [weak self] in
+            if let sustainOn = self?.sustain,
+                !sustainOn {
+                self?.activeNotes.remove(note)
+                self?.bank.stop(noteNumber: note)
+            }
         }
     }
 
