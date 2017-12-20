@@ -46,8 +46,10 @@ class Player {
 
         mixer = AKMixer(bank)
 
+        let microphone = AKMicrophone()
+        let microphoneMixer = AKMixer(microphone)
         do {
-            nodeRecorder = try AKNodeRecorder(node: mixer)
+            nodeRecorder = try AKNodeRecorder(node: microphoneMixer)
         } catch {
             fatalError()
         }

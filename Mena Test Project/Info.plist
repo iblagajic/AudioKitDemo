@@ -39,5 +39,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>We need your microphone usage permission to use record feature.</string>
 </dict>
 </plist>
